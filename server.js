@@ -23,7 +23,7 @@ fs.readFile(macAddressesFile, (err, data) => {
 // Create a HTTP server
 const server = http.createServer((req, res) => {
   // Get the MAC address from the request headers
-  const macAddress = req.headers['x-forwarded-for'];
+  const macAddress = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
 
   // Store the MAC address in the object
   macAddresses[macAddress] = new Date().toISOString();
